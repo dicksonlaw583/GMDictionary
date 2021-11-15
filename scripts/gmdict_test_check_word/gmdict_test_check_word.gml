@@ -14,7 +14,7 @@ function gmdict_test_pick_word() {
 	#endregion
 	
 	#region Add one word
-	dictionary.add("waahoo");
+	assert_equal(dictionary.add("waahoo"), 1, "PickWordDictionary add return failed!");
 	assert_equal(dictionary.size, 1, "PickWordDictionary add failed!");
 	assert_equal(dictionary.pick(), "waahoo", "PickWordDictionary should pick successfully!");
 	assert_equal(dictionary.pickN(1), ["waahoo"], "PickWordDictionary should pickN successfully!");
@@ -69,5 +69,10 @@ function gmdict_test_pick_word() {
 	var pickNResult = dictionary.pickN(13, true);
 	array_sort(pickNResult, true);
 	assert_equal(pickNResult, expected, "PickWordDictionary 3e pickN largeMode failed!");
+	#endregion
+	
+	#region Add multiple words
+	assert_equal(dictionary.add(["x", "y", "z"]), 3, "PickWordDictionary add multiple return failed!");
+	assert_equal(dictionary.size, 16, "PickWordDictionary add multiple failed!");
 	#endregion
 }

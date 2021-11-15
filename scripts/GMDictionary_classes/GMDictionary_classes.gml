@@ -1,4 +1,5 @@
-///@func CheckWordDictionary()
+///@func CheckWordDictionary(<source>)
+///@arg {string|array|struct} <source> (Optional) Source file(s) to load from. See `load(source)` for details.
 ///@desc Constructor for a dictionary optimized for checking the existence of a word in a list.
 function CheckWordDictionary() constructor {
 	///@func load(source)
@@ -38,11 +39,21 @@ function CheckWordDictionary() constructor {
 	};
 	
 	///@func add(word)
-	///@arg {string} word The string to add into the dictionary
-	///@desc Add a word into the dictionary.
+	///@arg {string|array} word The string or array of strings to add into the dictionary
+	///@desc Add a word or an array of words into the dictionary. Return the number of words loaded.
 	static add = function(word) {
-		self.data[$ word] = 1;
-		++self.size;
+		if (is_string(word)) {
+			self.data[$ word] = 1;
+			++self.size;
+			return 1;
+		} else if (is_array(word)) {
+			var n = array_length(word);
+			for (var i = n-1; i >= 0; --i) {
+				self.data[$ word[i]] = 1;
+			}
+			self.size += n;
+			return n;
+		}
 	};
 	
 	///@func check(word)
@@ -63,7 +74,8 @@ function CheckWordDictionary() constructor {
 	}
 }
 
-///@func PickWordDictionary()
+///@func PickWordDictionary(<source>)
+///@arg {string|array|struct} <source> (Optional) Source file(s) to load from. See `load(source)` for details.
 ///@desc Constructor for a dictionary optimized for picking a random word from a list.
 function PickWordDictionary() constructor {
 	///@func load(source)
@@ -103,11 +115,19 @@ function PickWordDictionary() constructor {
 	};
 	
 	///@func add(word)
-	///@arg {string} word The string to add into the dictionary
-	///@desc Add a word into the dictionary.
+	///@arg {string|array} word The string or array of strings to add into the dictionary
+	///@desc Add a word or an array of words into the dictionary. Return the number of words loaded.
 	static add = function(word) {
-		array_push(self.data, word);
-		++self.size;
+		if (is_string(word)) {
+			array_push(self.data, word);
+			++self.size;
+			return 1;
+		} else {
+			var n = array_length(word);
+			array_copy(self.data, self.size, word, 0, n);
+			self.size += n;
+			return n;
+		}
 	};
 	
 	///@func pick()

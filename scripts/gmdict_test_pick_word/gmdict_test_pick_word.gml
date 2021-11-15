@@ -11,7 +11,7 @@ function gmdict_test_check_word() {
 	#endregion
 	
 	#region Add one word
-	dictionary.add("hello");
+	assert_equal(dictionary.add("hello"), 1, "CheckWordDictionary add return failed!");
 	assert_equal(dictionary.size, 1, "CheckWordDictionary add failed!");
 	assert(dictionary.check("hello"), "CheckWordDictionary should find added word!");
 	assert_fail(dictionary.check("a"), "CheckWordDictionary should not find missing word!");
@@ -47,5 +47,10 @@ function gmdict_test_check_word() {
 	assert(dictionary.check("d"), "CheckWordDictionary 3d should find d!");
 	assert(dictionary.check("g"), "CheckWordDictionary 3e should find g!");
 	assert(dictionary.check("j"), "CheckWordDictionary 3f should find j!");
+	#endregion
+	
+	#region Add multiple words
+	assert_equal(dictionary.add(["x", "y", "z"]), 3, "CheckWordDictionary add multiple return failed!");
+	assert_equal(dictionary.size, 16, "CheckWordDictionary add multiple failed!");
 	#endregion
 }
