@@ -40,7 +40,7 @@ function CheckWordDictionary() constructor {
 	
 	///@func add(word)
 	///@arg {string|array} word The string or array of strings to add into the dictionary
-	///@desc Add a word or an array of words into the dictionary. Return the number of words loaded.
+	///@desc Add a word or an array of words into the dictionary. Return the number of words added.
 	static add = function(word) {
 		if (is_string(word)) {
 			self.data[$ word] = 1;
@@ -116,7 +116,7 @@ function PickWordDictionary() constructor {
 	
 	///@func add(word)
 	///@arg {string|array} word The string or array of strings to add into the dictionary
-	///@desc Add a word or an array of words into the dictionary. Return the number of words loaded.
+	///@desc Add a word or an array of words into the dictionary. Return the number of words added.
 	static add = function(word) {
 		if (is_string(word)) {
 			array_push(self.data, word);
@@ -131,7 +131,7 @@ function PickWordDictionary() constructor {
 	};
 	
 	///@func pick()
-	///@desc Add a word into the dictionary.
+	///@desc Return a random word from the dictionary.
 	static pick = function() {
 		if (self.size <= 0) {
 			throw new DictionaryTooSmallException(self, 1);
@@ -142,7 +142,7 @@ function PickWordDictionary() constructor {
 	///@func pickN(n, <largeMode>)
 	///@arg {int} n Number of words to pick
 	///@arg {bool} largeMode
-	///@desc Return an array of N random unique words from the dictionary.
+	///@desc Return an array of n random unique words from the dictionary.
 	/// - If largeMode is false (default): Pick n times randomly from the dictionary and re-pick on duplication.
 	/// - If largeMode is true: Shuffle a copy of the dictionary's inner data, and pick the first n words.
 	static pickN = function(n, largeMode=false) {
