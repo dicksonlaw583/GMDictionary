@@ -17,7 +17,7 @@ These classes can then load word lists in batch from line-by-line text files, or
 
 ## Installation
 
-- Go to the [Releases Page](https;//github.com/dicksonlaw583/GMDictionary/releases) to download the latest YYMPS package.
+- Go to the [Releases Page](https://github.com/dicksonlaw583/GMDictionary/releases) to download the latest YYMPS package.
 - In GameMaker Studio, select **Tools > Import Local Package**, and select the downloaded YYMPS package.
 - Add everything under `Libraries/GMDictionary`.
 - Depending on the way your project uses words, you may optionally add one of the dictionary lists under Included Files:
