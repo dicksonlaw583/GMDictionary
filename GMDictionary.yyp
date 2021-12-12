@@ -154,7 +154,7 @@
     {"CopyToMask":-1,"filePath":"datafiles/dictionaries/simple_by_length","resourceVersion":"1.0","name":"12.txt","resourceType":"GMIncludedFile",},
   ],
   "MetaData": {
-    "IDEVersion": "2.3.6.595",
+    "IDEVersion": "2.3.7.606",
   },
   "resourceVersion": "1.4",
   "name": "GMDictionary",
