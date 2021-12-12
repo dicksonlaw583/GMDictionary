@@ -18,7 +18,7 @@ function gmdict_test_check_word() {
 	#endregion
 	
 	#region Test single-file loading
-	assert_equal(dictionary.load(working_directory + "/dictionaries/test/abc.txt"), 3, "CheckWordDictionary load return value 1a failed!");
+	assert_equal(dictionary.load(working_directory + "dictionaries/test/abc.txt"), 3, "CheckWordDictionary load return value 1a failed!");
 	assert_equal(dictionary.size, 4, "CheckWordDictionary load new size 1b failed!");
 	assert(dictionary.check("a"), "CheckWordDictionary 1c should find a!");
 	assert_fail(dictionary.check("d"), "CheckWordDictionary 1d should not find d!");
@@ -27,7 +27,7 @@ function gmdict_test_check_word() {
 	#endregion
 	
 	#region Test multi-file array loading
-	assert_equal(dictionary.load([working_directory + "/dictionaries/test/def.txt", working_directory + "/dictionaries/test/ghi.txt"]), 6, "CheckWordDictionary load return value 2a failed!");
+	assert_equal(dictionary.load([working_directory + "dictionaries/test/def.txt", working_directory + "dictionaries/test/ghi.txt"]), 6, "CheckWordDictionary load return value 2a failed!");
 	assert_equal(dictionary.size, 10, "CheckWordDictionary load new size 2b failed!");
 	assert(dictionary.check("a"), "CheckWordDictionary 2c should find a!");
 	assert(dictionary.check("d"), "CheckWordDictionary 2d should find d!");
@@ -37,10 +37,10 @@ function gmdict_test_check_word() {
 	
 	#region Test multi-file struct loading
 	var loadStruct = {};
-	loadStruct[$ working_directory + "/dictionaries/test/abc.txt"] = 0;
-	loadStruct[$ working_directory + "/dictionaries/test/def.txt"] = 0;
-	loadStruct[$ working_directory + "/dictionaries/test/ghi.txt"] = 0;
-	loadStruct[$ working_directory + "/dictionaries/test/jkl.txt"] = 1;
+	loadStruct[$ working_directory + "dictionaries/test/abc.txt"] = 0;
+	loadStruct[$ working_directory + "dictionaries/test/def.txt"] = 0;
+	loadStruct[$ working_directory + "dictionaries/test/ghi.txt"] = 0;
+	loadStruct[$ working_directory + "dictionaries/test/jkl.txt"] = 1;
 	assert_equal(dictionary.load(loadStruct), 3, "CheckWordDictionary load return value 3a failed!");
 	assert_equal(dictionary.size, 13, "CheckWordDictionary load new size 3b failed!");
 	assert(dictionary.check("a"), "CheckWordDictionary 3c should find a!");

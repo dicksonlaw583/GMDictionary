@@ -23,7 +23,7 @@ function gmdict_test_pick_word() {
 	
 	#region Test single-file loading
 	expected = ["a", "b", "c", "waahoo"];
-	assert_equal(dictionary.load(working_directory + "/dictionaries/test/abc.txt"), 3, "PickWordDictionary load return value 1a failed!");
+	assert_equal(dictionary.load(working_directory + "dictionaries/test/abc.txt"), 3, "PickWordDictionary load return value 1a failed!");
 	assert_equal(dictionary.size, 4, "PickWordDictionary load new size 1b failed!");
 	repeat (20) {
 		assert_contains(expected, dictionary.pick(), "PickWordDictionary 1c pick should return something valid!");
@@ -38,7 +38,7 @@ function gmdict_test_pick_word() {
 	
 	#region Test multi-file array loading
 	expected = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "waahoo"];
-	assert_equal(dictionary.load([working_directory + "/dictionaries/test/def.txt", working_directory + "/dictionaries/test/ghi.txt"]), 6, "PickWordDictionary load return value 2a failed!");
+	assert_equal(dictionary.load([working_directory + "dictionaries/test/def.txt", working_directory + "dictionaries/test/ghi.txt"]), 6, "PickWordDictionary load return value 2a failed!");
 	assert_equal(dictionary.size, 10, "PickWordDictionary load new size 2b failed!");
 	repeat (20) {
 		assert_contains(expected, dictionary.pick(), "PickWordDictionary 2c pick should return something valid!");
@@ -54,10 +54,10 @@ function gmdict_test_pick_word() {
 	#region Test multi-file struct loading
 	expected = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "waahoo"];
 	var loadStruct = {};
-	loadStruct[$ working_directory + "/dictionaries/test/abc.txt"] = 0;
-	loadStruct[$ working_directory + "/dictionaries/test/def.txt"] = 0;
-	loadStruct[$ working_directory + "/dictionaries/test/ghi.txt"] = 0;
-	loadStruct[$ working_directory + "/dictionaries/test/jkl.txt"] = 1;
+	loadStruct[$ working_directory + "dictionaries/test/abc.txt"] = 0;
+	loadStruct[$ working_directory + "dictionaries/test/def.txt"] = 0;
+	loadStruct[$ working_directory + "dictionaries/test/ghi.txt"] = 0;
+	loadStruct[$ working_directory + "dictionaries/test/jkl.txt"] = 1;
 	assert_equal(dictionary.load(loadStruct), 3, "PickWordDictionary load return value 3a failed!");
 	assert_equal(dictionary.size, 13, "PickWordDictionary load new size 3b failed!");
 	repeat (20) {
