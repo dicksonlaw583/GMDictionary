@@ -1,9 +1,10 @@
 ///@func CheckWordDictionary(<source>)
-///@arg {string|array|struct} <source> (Optional) Source file(s) to load from. See `load(source)` for details.
+///@arg {String,Array.String,Struct} <source> (Optional) Source file(s) to load from. See `load(source)` for details.
 ///@desc Constructor for a dictionary optimized for checking the existence of a word in a list.
 function CheckWordDictionary() constructor {
 	///@func load(source)
-	///@arg {string|array|struct} source
+	///@arg {String,Array.String,Struct} source
+	///@return {Real}
 	///@desc Load words into the dictionary from the given source. Return the number of words loaded.
 	/// - If source is a string: Load from the given file.
 	/// - If source is an array: Load from each file in the array.
@@ -39,7 +40,8 @@ function CheckWordDictionary() constructor {
 	};
 	
 	///@func add(word)
-	///@arg {string|array} word The string or array of strings to add into the dictionary
+	///@arg {String|Array.String} word The string or array of strings to add into the dictionary
+	///@return {Real}
 	///@desc Add a word or an array of words into the dictionary. Return the number of words added.
 	static add = function(word) {
 		if (is_string(word)) {
@@ -57,7 +59,8 @@ function CheckWordDictionary() constructor {
 	};
 	
 	///@func check(word)
-	///@arg {string} word The string to check
+	///@arg {String} word The string to check
+	///@return {Bool}
 	///@desc Return whether the given word is in the dictionary.
 	static check = function(word) {
 		if (self.size <= 0) {
@@ -75,11 +78,12 @@ function CheckWordDictionary() constructor {
 }
 
 ///@func PickWordDictionary(<source>)
-///@arg {string|array|struct} <source> (Optional) Source file(s) to load from. See `load(source)` for details.
+///@arg {String,Array.String,Struct} <source> (Optional) Source file(s) to load from. See `load(source)` for details.
 ///@desc Constructor for a dictionary optimized for picking a random word from a list.
 function PickWordDictionary() constructor {
 	///@func load(source)
-	///@arg {string|array|struct} source
+	///@arg {String,Array.String,Struct} source
+	///@return {Real}
 	///@desc Load words into the dictionary from the given source. Return the number of words loaded.
 	/// - If source is a string: Load from the given file.
 	/// - If source is an array: Load from each file in the array.
@@ -115,7 +119,8 @@ function PickWordDictionary() constructor {
 	};
 	
 	///@func add(word)
-	///@arg {string|array} word The string or array of strings to add into the dictionary
+	///@arg {String|Array.String} word The string or array of strings to add into the dictionary
+	///@return {Real}
 	///@desc Add a word or an array of words into the dictionary. Return the number of words added.
 	static add = function(word) {
 		if (is_string(word)) {
@@ -131,6 +136,7 @@ function PickWordDictionary() constructor {
 	};
 	
 	///@func pick()
+	///@return {String}
 	///@desc Return a random word from the dictionary.
 	static pick = function() {
 		if (self.size <= 0) {
@@ -140,8 +146,9 @@ function PickWordDictionary() constructor {
 	};
 	
 	///@func pickN(n, <largeMode>)
-	///@arg {int} n Number of words to pick
-	///@arg {bool} largeMode
+	///@arg {Real} n Number of words to pick
+	///@arg {Bool} largeMode
+	///@return {Array.String}
 	///@desc Return an array of n random unique words from the dictionary.
 	/// - If largeMode is false (default): Pick n times randomly from the dictionary and re-pick on duplication.
 	/// - If largeMode is true: Shuffle a copy of the dictionary's inner data, and pick the first n words.
