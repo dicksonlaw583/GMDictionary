@@ -1,14 +1,17 @@
 ///@func gmdict_test_pick_word()
 function gmdict_test_pick_word() {
 	var dictionary, expected;
+	var pickNResult;
 	
 	#region Initial setup
 	dictionary = new PickWordDictionary();
 	assert_equal(dictionary.size, 0, "PickWordDictionary setup failed!");
 	assert_throws(method({ dict: dictionary }, function() {
+		//Feather disable GM1013
 		dict.pick();
 	}), new DictionaryTooSmallException(dictionary, 1), "PickWordDictionary setup should throw error on pick!");
 	assert_throws(method({ dict: dictionary }, function() {
+		//Feather disable GM1013
 		dict.pickN(2);
 	}), new DictionaryTooSmallException(dictionary, 2), "PickWordDictionary setup should throw error on pickN!");
 	#endregion
@@ -28,10 +31,10 @@ function gmdict_test_pick_word() {
 	repeat (20) {
 		assert_contains(expected, dictionary.pick(), "PickWordDictionary 1c pick should return something valid!");
 	}
-	var pickNResult = dictionary.pickN(4);
+	pickNResult = dictionary.pickN(4);
 	array_sort(pickNResult, true);
 	assert_equal(pickNResult, expected, "PickWordDictionary 1d pickN failed!");
-	var pickNResult = dictionary.pickN(4, true);
+	pickNResult = dictionary.pickN(4, true);
 	array_sort(pickNResult, true);
 	assert_equal(pickNResult, expected, "PickWordDictionary 1e pickN largeMode failed!");
 	#endregion
@@ -43,10 +46,10 @@ function gmdict_test_pick_word() {
 	repeat (20) {
 		assert_contains(expected, dictionary.pick(), "PickWordDictionary 2c pick should return something valid!");
 	}
-	var pickNResult = dictionary.pickN(10);
+	pickNResult = dictionary.pickN(10);
 	array_sort(pickNResult, true);
 	assert_equal(pickNResult, expected, "PickWordDictionary 2d pickN failed!");
-	var pickNResult = dictionary.pickN(10, true);
+	pickNResult = dictionary.pickN(10, true);
 	array_sort(pickNResult, true);
 	assert_equal(pickNResult, expected, "PickWordDictionary 2e pickN largeMode failed!");
 	#endregion
@@ -63,10 +66,10 @@ function gmdict_test_pick_word() {
 	repeat (20) {
 		assert_contains(expected, dictionary.pick(), "PickWordDictionary 3c pick should return something valid!");
 	}
-	var pickNResult = dictionary.pickN(13);
+	pickNResult = dictionary.pickN(13);
 	array_sort(pickNResult, true);
 	assert_equal(pickNResult, expected, "PickWordDictionary 3d pickN failed!");
-	var pickNResult = dictionary.pickN(13, true);
+	pickNResult = dictionary.pickN(13, true);
 	array_sort(pickNResult, true);
 	assert_equal(pickNResult, expected, "PickWordDictionary 3e pickN largeMode failed!");
 	#endregion

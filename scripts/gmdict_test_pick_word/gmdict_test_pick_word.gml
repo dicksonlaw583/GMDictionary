@@ -6,6 +6,7 @@ function gmdict_test_check_word() {
 	dictionary = new CheckWordDictionary();
 	assert_equal(dictionary.size, 0, "CheckWordDictionary setup failed!");
 	assert_throws(method({ dict: dictionary }, function() {
+		//Feather disable GM1013
 		dict.check("a");
 	}), new DictionaryTooSmallException(dictionary, 1), "CheckWordDictionary setup should throw error on lookup!");
 	#endregion

@@ -1,9 +1,9 @@
-///@func CheckWordDictionary(<source>)
-///@arg {string|array|struct} <source> (Optional) Source file(s) to load from. See `load(source)` for details.
+///@func CheckWordDictionary([source])
+///@arg {string,array<string>,struct} source (Optional) Source file(s) to load from. See `load(source)` for details.
 ///@desc Constructor for a dictionary optimized for checking the existence of a word in a list.
 function CheckWordDictionary() constructor {
 	///@func load(source)
-	///@arg {string|array|struct} source
+	///@arg {string,array<string>,struct} source
 	///@desc Load words into the dictionary from the given source. Return the number of words loaded.
 	/// - If source is a string: Load from the given file.
 	/// - If source is an array: Load from each file in the array.
@@ -11,7 +11,8 @@ function CheckWordDictionary() constructor {
 	static load = function(source) {
 		var n = 0;
 		if (is_string(source)) {
-			for (var f = file_text_open_read(source); !file_text_eof(f); file_text_readln(f)) {
+			var f;
+			for (f = file_text_open_read(source); !file_text_eof(f); file_text_readln(f)) {
 				var w = file_text_read_string(f);
 				self.data[$ w] = 1;
 				++n;
@@ -19,8 +20,10 @@ function CheckWordDictionary() constructor {
 			file_text_close(f);
 			self.size += n;
 		} else if (is_array(source)) {
+			//Feather disable GM1061
 			var sourceSize = array_length(source);
 			for (var i = 0; i < sourceSize; ++i) {
+				//Feather disable GM1010
 				n += self.load(source[i]);
 			}
 		} else if (is_struct(source)) {
@@ -29,6 +32,7 @@ function CheckWordDictionary() constructor {
 			for (var i = 0; i < sourceSize; ++i) {
 				var k = sourceKeys[i];
 				if (source[$ k]) {
+					//Feather disable GM1041
 					n += self.load(k);
 				}
 			}
@@ -39,7 +43,7 @@ function CheckWordDictionary() constructor {
 	};
 	
 	///@func add(word)
-	///@arg {string|array} word The string or array of strings to add into the dictionary
+	///@arg {string,array<string>} word The string or array of strings to add into the dictionary
 	///@desc Add a word or an array of words into the dictionary. Return the number of words added.
 	static add = function(word) {
 		if (is_string(word)) {
@@ -47,6 +51,7 @@ function CheckWordDictionary() constructor {
 			++self.size;
 			return 1;
 		} else if (is_array(word)) {
+			//Feather disable GM1061
 			var n = array_length(word);
 			for (var i = n-1; i >= 0; --i) {
 				self.data[$ word[i]] = 1;
@@ -75,11 +80,11 @@ function CheckWordDictionary() constructor {
 }
 
 ///@func PickWordDictionary(<source>)
-///@arg {string|array|struct} <source> (Optional) Source file(s) to load from. See `load(source)` for details.
+///@arg {string,array<string>,struct} <source> (Optional) Source file(s) to load from. See `load(source)` for details.
 ///@desc Constructor for a dictionary optimized for picking a random word from a list.
 function PickWordDictionary() constructor {
 	///@func load(source)
-	///@arg {string|array|struct} source
+	///@arg {string,array<string>,struct} source
 	///@desc Load words into the dictionary from the given source. Return the number of words loaded.
 	/// - If source is a string: Load from the given file.
 	/// - If source is an array: Load from each file in the array.
@@ -87,7 +92,8 @@ function PickWordDictionary() constructor {
 	static load = function(source) {
 		var n = 0;
 		if (is_string(source)) {
-			for (var f = file_text_open_read(source); !file_text_eof(f); file_text_readln(f)) {
+			var f;
+			for (f = file_text_open_read(source); !file_text_eof(f); file_text_readln(f)) {
 				var w = file_text_read_string(f);
 				array_push(self.data, w);
 				++n;
@@ -95,8 +101,10 @@ function PickWordDictionary() constructor {
 			file_text_close(f);
 			self.size += n;
 		} else if (is_array(source)) {
+			//Feather disable GM1061
 			var sourceSize = array_length(source);
 			for (var i = 0; i < sourceSize; ++i) {
+				//Feather disable GM1010
 				n += self.load(source[i]);
 			}
 		} else if (is_struct(source)) {
@@ -105,6 +113,7 @@ function PickWordDictionary() constructor {
 			for (var i = 0; i < sourceSize; ++i) {
 				var k = sourceKeys[i];
 				if (source[$ k]) {
+					//Feather disable GM1041
 					n += self.load(k);
 				}
 			}
@@ -115,7 +124,7 @@ function PickWordDictionary() constructor {
 	};
 	
 	///@func add(word)
-	///@arg {string|array} word The string or array of strings to add into the dictionary
+	///@arg {string,array<string>} word The string or array of strings to add into the dictionary
 	///@desc Add a word or an array of words into the dictionary. Return the number of words added.
 	static add = function(word) {
 		if (is_string(word)) {
@@ -140,7 +149,7 @@ function PickWordDictionary() constructor {
 	};
 	
 	///@func pickN(n, <largeMode>)
-	///@arg {int} n Number of words to pick
+	///@arg {real} n Number of words to pick
 	///@arg {bool} largeMode
 	///@desc Return an array of n random unique words from the dictionary.
 	/// - If largeMode is false (default): Pick n times randomly from the dictionary and re-pick on duplication.
@@ -163,9 +172,10 @@ function PickWordDictionary() constructor {
 		} else {
 			result = array_create(n);
 			var seenWords = {};
+			var pickedWord;
 			for (var i = n-1; i >= 0; --i) {
 				do {
-					var pickedWord = self.data[irandom(self.size-1)];
+					pickedWord = self.data[irandom(self.size-1)];
 				} until (!variable_struct_exists(seenWords, pickedWord));
 				seenWords[$ pickedWord] = 1;
 				result[@ i] = pickedWord;
