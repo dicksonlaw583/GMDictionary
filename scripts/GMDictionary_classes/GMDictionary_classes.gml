@@ -5,8 +5,11 @@ function CheckWordDictionary() constructor {
 	///@func load(source)
 	///@arg {string,array<string>,struct} source
 	///@desc Load words into the dictionary from the given source. Return the number of words loaded.
+	///
 	/// - If source is a string: Load from the given file.
+	///
 	/// - If source is an array: Load from each file in the array.
+	///
 	/// - If source is a struct: Load from each file in the struct's keys where the corresponding value is true.
 	static load = function(source) {
 		var n = 0;
@@ -44,6 +47,7 @@ function CheckWordDictionary() constructor {
 	
 	///@func add(word)
 	///@arg {string,array<string>} word The string or array of strings to add into the dictionary
+	///@return {real}
 	///@desc Add a word or an array of words into the dictionary. Return the number of words added.
 	static add = function(word) {
 		if (is_string(word)) {
@@ -63,6 +67,7 @@ function CheckWordDictionary() constructor {
 	
 	///@func check(word)
 	///@arg {string} word The string to check
+	///@return {bool}
 	///@desc Return whether the given word is in the dictionary.
 	static check = function(word) {
 		if (self.size <= 0) {
@@ -86,8 +91,11 @@ function PickWordDictionary() constructor {
 	///@func load(source)
 	///@arg {string,array<string>,struct} source
 	///@desc Load words into the dictionary from the given source. Return the number of words loaded.
+	///
 	/// - If source is a string: Load from the given file.
+	///
 	/// - If source is an array: Load from each file in the array.
+	///
 	/// - If source is a struct: Load from each file in the struct's keys where the corresponding value is true.
 	static load = function(source) {
 		var n = 0;
@@ -125,6 +133,7 @@ function PickWordDictionary() constructor {
 	
 	///@func add(word)
 	///@arg {string,array<string>} word The string or array of strings to add into the dictionary
+	///@return {real}
 	///@desc Add a word or an array of words into the dictionary. Return the number of words added.
 	static add = function(word) {
 		if (is_string(word)) {
@@ -140,6 +149,7 @@ function PickWordDictionary() constructor {
 	};
 	
 	///@func pick()
+	///@return {string}
 	///@desc Return a random word from the dictionary.
 	static pick = function() {
 		if (self.size <= 0) {
@@ -151,8 +161,11 @@ function PickWordDictionary() constructor {
 	///@func pickN(n, <largeMode>)
 	///@arg {real} n Number of words to pick
 	///@arg {bool} largeMode
+	///@return {array<string>}
 	///@desc Return an array of n random unique words from the dictionary.
+	///
 	/// - If largeMode is false (default): Pick n times randomly from the dictionary and re-pick on duplication.
+	///
 	/// - If largeMode is true: Shuffle a copy of the dictionary's inner data, and pick the first n words.
 	static pickN = function(n, largeMode=false) {
 		if (self.size < n) {
@@ -181,7 +194,9 @@ function PickWordDictionary() constructor {
 				result[@ i] = pickedWord;
 			}
 		}
+		//Feather disable GM1045
 		return result;
+		//Feather enable GM1045
 	};
 	
 	// Setup

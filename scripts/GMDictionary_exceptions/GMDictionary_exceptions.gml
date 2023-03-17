@@ -6,6 +6,9 @@ function DictionaryTooSmallException(dictionary, n) constructor {
 	self.dictionary = dictionary;
 	self.n = n;
 	
+	///@func toString()
+	///@return {String}
+	///@desc Return the string form of this exception.
 	static toString = function() {
 		return "Attempting to query " + string(self.n) + " word(s) from a dictionary of size " + string(self.dictionary.size) + ".";
 	};
