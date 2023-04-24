@@ -7,6 +7,7 @@ function DictionaryTooSmallException(dictionary, n) constructor {
 	self.n = n;
 	
 	///@func toString()
+	///@self DictionaryTooSmallException
 	///@return {String}
 	///@desc Return the string form of this exception.
 	static toString = function() {

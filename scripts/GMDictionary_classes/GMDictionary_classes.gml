@@ -1,8 +1,9 @@
-///@func CheckWordDictionary([source])
-///@arg {string,array<string>,struct} source (Optional) Source file(s) to load from. See `load(source)` for details.
+///@class CheckWordDictionary([source])
+///@arg {string,array<string>,struct,undefined} [source] (Optional) Source file(s) to load from. See `load(source)` for details.
 ///@desc Constructor for a dictionary optimized for checking the existence of a word in a list.
-function CheckWordDictionary() constructor {
+function CheckWordDictionary(source=undefined) constructor {
 	///@func load(source)
+	///@self CheckWordDictionary
 	///@arg {string,array<string>,struct} source
 	///@desc Load words into the dictionary from the given source. Return the number of words loaded.
 	///
@@ -46,6 +47,7 @@ function CheckWordDictionary() constructor {
 	};
 	
 	///@func add(word)
+	///@self CheckWordDictionary
 	///@arg {string,array<string>} word The string or array of strings to add into the dictionary
 	///@return {real}
 	///@desc Add a word or an array of words into the dictionary. Return the number of words added.
@@ -66,6 +68,7 @@ function CheckWordDictionary() constructor {
 	};
 	
 	///@func check(word)
+	///@self CheckWordDictionary
 	///@arg {string} word The string to check
 	///@return {bool}
 	///@desc Return whether the given word is in the dictionary.
@@ -79,16 +82,17 @@ function CheckWordDictionary() constructor {
 	// Setup
 	data = {};
 	size = 0;
-	if (argument_count > 0) {
-		self.load(argument[0]);
+	if (!is_undefined(source)) {
+		self.load(source);
 	}
 }
 
-///@func PickWordDictionary(<source>)
-///@arg {string,array<string>,struct} <source> (Optional) Source file(s) to load from. See `load(source)` for details.
+///@class PickWordDictionary([source])
+///@arg {string,array<string>,struct,undefined} [source] (Optional) Source file(s) to load from. See `load(source)` for details.
 ///@desc Constructor for a dictionary optimized for picking a random word from a list.
-function PickWordDictionary() constructor {
+function PickWordDictionary(source=undefined) constructor {
 	///@func load(source)
+	///@self PickWordDictionary
 	///@arg {string,array<string>,struct} source
 	///@desc Load words into the dictionary from the given source. Return the number of words loaded.
 	///
@@ -132,6 +136,7 @@ function PickWordDictionary() constructor {
 	};
 	
 	///@func add(word)
+	///@self PickWordDictionary
 	///@arg {string,array<string>} word The string or array of strings to add into the dictionary
 	///@return {real}
 	///@desc Add a word or an array of words into the dictionary. Return the number of words added.
@@ -149,6 +154,7 @@ function PickWordDictionary() constructor {
 	};
 	
 	///@func pick()
+	///@self PickWordDictionary
 	///@return {string}
 	///@desc Return a random word from the dictionary.
 	static pick = function() {
@@ -158,7 +164,8 @@ function PickWordDictionary() constructor {
 		return self.data[irandom(self.size-1)];
 	};
 	
-	///@func pickN(n, <largeMode>)
+	///@func pickN(n, [largeMode])
+	///@self PickWordDictionary
 	///@arg {real} n Number of words to pick
 	///@arg {bool} largeMode
 	///@return {array<string>}
@@ -202,7 +209,7 @@ function PickWordDictionary() constructor {
 	// Setup
 	data = [];
 	size = 0;
-	if (argument_count > 0) {
-		self.load(argument[0]);
+	if (!is_undefined(source)) {
+		self.load(source);
 	}
 }
